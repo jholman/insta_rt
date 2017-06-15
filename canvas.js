@@ -1,5 +1,3 @@
-
-
 var canvas_lib = module.exports = function (canvas_selector) {
   var canvas = document.getElementById(canvas_selector);
   var ctx = canvas.getContext('2d');
@@ -50,6 +48,6 @@ var canvas_lib = module.exports = function (canvas_selector) {
 }
 
 canvas_lib.rgb = function(r, g, b) {
-  return `rgb(${r}, ${g}, ${b})`;
+  return `rgb(${Math.floor(r)}, ${Math.floor(g)}, ${Math.floor(b)})`;
 }
 
