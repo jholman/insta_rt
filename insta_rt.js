@@ -1,4 +1,5 @@
 
+var scene = require('./scene');
 var canvas_lib = require('./canvas');
 var canvas = window.cc = canvas_lib('canvas');
 var rgb = canvas_lib.rgb;
@@ -7,23 +8,6 @@ var max_fov_rads = Math.PI / 2;
 var pixel_scale = Math.tan(max_fov_rads / 2) / 
           (Math.max(canvas.width, canvas.height) / 2);
 
-var scene = [
-  {
-    mode: 'sphere',
-    params: {x: 5, y: 0, z: -20, r: 10},
-    material: {
-      inherent: {r: 0, g: 0, b: 0, percentage: 100},
-    },
-  },
-  {
-    mode: 'sphere',
-    params: {x: 0, y: 0, z: -9, r: 1},
-    material: {
-      inherent: {r: 255, g: 255, b: 255, percentage: 100}
-    }
-  },
-
-]
 
 for (var pix of canvas.allPixels()) {
   var ray = pix2ray(pix);
