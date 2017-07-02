@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "description": "How fast can we build a working raytracer in JS?",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "./node_modules/.bin/mocha",
+    "test-watch": "./node_modules/.bin/mocha --watch",
     "start": "webpack-dev-server"
   },
   "author": "",
@@ -12,5 +13,9 @@
   "dependencies": {
     "webpack": "^2.6.1",
     "webpack-dev-server": "^2.4.5"
+  },
+  "devDependencies": {
+    "chai": "^4.0.2",
+    "mocha": "^3.4.2"
   }
 }
