@@ -1,9 +1,12 @@
+vec_create_count = 0;   // deliberately global, for profiling
+mat_create_count = 0;   // deliberately global, for profiling
 
 // =======================
 //      Vector class
 // =======================
 
 function Vec() {
+  vec_create_count++;   // deliberately global, for profiling
   if (arguments.length === 1 && arguments[0] instanceof Vec) {
     throw "cloning not implemented";
   }
@@ -110,6 +113,7 @@ Vec.prototype.reflectAround = function(normal) {
 
 
 function Mat(input) {
+  mat_create_count++; // deliberately global, for profiling
   if (!(input instanceof Array)){
     throw "invalid argument to Mat - must be a square Array-of-Arrays of Numbers";
   }
