@@ -1,27 +1,29 @@
 
+var BLOCK_RAD = 0;
+var BLOCK_DIAM = BLOCK_RAD * 2 + 1;
 
 var canvas_lib = module.exports = function (canvas_selector) {
   var canvas = document.getElementById(canvas_selector);
   var ctx = canvas.getContext('2d');
 
-  var middleX = Math.floor(canvas.width / 2.0);
-  var middleY = Math.floor(canvas.height / 2.0);
+  var middleX = Math.floor(canvas.width / BLOCK_DIAM / 2.0);
+  var middleY = Math.floor(canvas.height / BLOCK_DIAM / 2.0);
   // TODO: add event listener on resize to recalculate these
 
   function _setPixel(x, y, color) {
     ctx.fillStyle = color;
-    var _x = Math.floor(x) + middleX;
-    var _y = middleY - Math.floor(y) - 1;
+    var _x = BLOCK_DIAM * (Math.floor(x) + middleX);
+    var _y = BLOCK_DIAM * (middleY - Math.floor(y) - 1);
     // console.log(`fill ${x}(${_x}), ${y}(${_y}), ${color}`);
-    ctx.fillRect(_x, _y, 1, 1);
+    ctx.fillRect(_x, _y, BLOCK_DIAM, BLOCK_DIAM);
   }
 
   return {
-    get width() { return canvas.width; },
-    get height() { return canvas.height; },
-    get maxX() { return canvas.width - middleX - 1; },
+    get width() { return Math.floor(canvas.width / BLOCK_DIAM); },
+    get height() { return Math.floor(canvas.height / BLOCK_DIAM); },
+    get maxX() { return this.width - middleX - 1; },
     get minX() { return 0 - middleX; },
-    get maxY() { return canvas.height - middleY - 1; },
+    get maxY() { return this.height - middleY - 1; },
     get minY() { return 0 - middleY; },
 
     setPixel() {
@@ -39,8 +41,8 @@ var canvas_lib = module.exports = function (canvas_selector) {
     },
 
     allPixels: function* () {
-      for (var i = 0; i < canvas.height; i++) {
-        for (var j = 0; j < canvas.width; j++) {
+      for (var i = 0; i < this.height; i++) {
+        for (var j = 0; j < this.width; j++) {
           yield {x: j - middleX, y: i - middleY};
         }
       }
